@@ -67,9 +67,10 @@
         state: "dump"
       loop: "{{packages}}"
     - name: fetch
-      fetch:
-        dest: /tmp/
-        src: /tmp/mezz1.sql
+      shell: "ansible mysql3 -m fetch -a 'src=/tmp/mezz1.sql dest=/tmp'"
+#      fetch:
+#        dest: /tmp/
+#        src: /tmp/mezz1.sql
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
