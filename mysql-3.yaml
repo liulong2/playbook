@@ -4,8 +4,8 @@
   become: true
   vars:
     packages:
-      - 192.168.0.206
-      - 192.168.0.207
+      - "192.168.0.206"
+      - "192.168.0.207"
 
   tasks:
     #解决 pip安装时报错
@@ -69,7 +69,7 @@
     - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz.sql
+        src: /tmp/mezz11111.sql
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
