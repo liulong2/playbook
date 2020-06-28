@@ -98,4 +98,4 @@
     - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz.sql
+        src: /tmp/mezz$(date +%Y-%m-%d).sql
