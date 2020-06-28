@@ -58,8 +58,7 @@
 #        name: MySQL-python
     - name: dump a database
       mysql_db:
-        login_host:
-          - {{packages}}
+        login_host: "{{packages}}"
         login_user: root
         login_password: "root"
         login_port: 3306
