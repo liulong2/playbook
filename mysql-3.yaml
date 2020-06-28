@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: rpm pip install
-      shell: "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+      rpm: "http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
     - name: installed pip
       yum:
         name: python-pip
