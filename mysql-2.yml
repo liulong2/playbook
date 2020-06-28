@@ -4,7 +4,7 @@
   become: true
   vars:
     packages: mysql-devel
-      #      - mariadb
+    #      - mariadb
     #      - mariadb-server
     devle: MySQL-python
 
@@ -24,10 +24,11 @@
 
     - name: weget
       shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
-#        state: installed
-#        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+    #        state: installed
+    #        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
     - name: rpm
-      shell: chdir=/usr/local/yum  executeble="rpm mysql-community-release-el7-5.noarch.rpm"
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
+
     - name: update Mysql
       yum:
         name: mysql-community-server
@@ -37,6 +38,23 @@
       yum:
         name: mysql-devel
         state: present
+    #解决 pip安装时报错
+    - name: weget pip
+      shell: "wget -P /usr/local/yum http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+    # 第一次执行时需要进行安装
+    #    - name: rpm pip install
+    #      shell: "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+    - name: rpm pip
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh epel-release-6-8.noarch.rpm"
+
+    #解决 pip安装时报错
+    - name: rpm pip bug
+      shell: "wget -P /usr/local/yum http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
+    - name: rpm
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
+
+    - name: update yum
+      shell: "yum update"
 
     - name: installed pip
       yum:
@@ -45,28 +63,32 @@
 
     - name: update pip
       shell: "pip install --upgrade pip"
-#      pip:
-#        name: upgrade
-#        state: latest
+    #      pip:
+    #        name: upgrade
+    #        state: latest
 
-    - name: devel
+    - name: python-devel
       yum:
         name: python-devel
         state: installed
+
     - name: gcc
-      shell: "yum install gcc python-devel"
+      yum:
+        name: gcc
+        state: installed
+    #      shell: "yum install gcc"
 
     - name: MySQL-python
-#      yum:
-#        name: MySQL-python
-#      #        state: installed
-#        state: installed
+      #      yum:
+      #        name: MySQL-python
+      #      #        state: installed
+      #        state: installed
       pip:
         name: MySQL-python
 
     - name: dump a database
       mysql_db:
-        login_host: 192.168.188.142
+        login_host: 192.168.0.206
         login_user: root
         login_password: "root"
         login_port: 3306
