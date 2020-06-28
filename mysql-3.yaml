@@ -1,8 +1,7 @@
 ---
 - name: mysql
   hosts: mysql3
-  become: sudo
-  sudo_user: root
+  become: true
   vars:
     packages:
       - "192.168.0.206"
