@@ -8,32 +8,16 @@
       shell: "yum clean all"
     - name: yum clean all
       shell: "rpm --rebuilddb"
-    - name: upgrade all packages
-      yum:
-        name: "*"
-        state: latest
+#    - name: upgrade all packages
+#      yum:
+#        name: "*"
+#        state: latest
     - name: yum remove
       shell: "yum remove epel-release"
     - name: yum -y install epel-release
       yum:
         name: epel-release;
         state: latest
-
-
-      #    - name: update yum
-#      yum:
-#        name: update
-#    - name: yum
-#      shell: "yum -y install epel-release"
-##    - name: update yum
-##      shell: "yum install -y python-pip"
-
-#    #解决 pip安装时报错
-#    - name: rpm pip bug
-#      shell: "wget -P /usr/local/yum http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
-#    - name: rpm
-#
-#      shell: chdir=/usr/local/yum  executeble="rpm -ivh Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
     - name: installed pip
       yum:
         name: python-pip
