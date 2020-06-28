@@ -18,9 +18,7 @@
         state: removed
 
     - name: yum -y install epel-release
-      yum:
-        name: epel-release;
-        state: latest
+      shell: "yum -y install epel-release"
     - name: installed pip
       yum:
         name: python-pip
