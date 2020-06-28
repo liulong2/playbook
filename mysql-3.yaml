@@ -3,6 +3,10 @@
   hosts: mysql3
   become: true
   tasks:
+    - name: installed pip
+      yum:
+        name: python-pip
+        state: installed
     - name: MySQL-python
       #      yum:
       #        name: MySQL-python
