@@ -53,7 +53,7 @@
 #        name: MySQL-python
     - name: dump a database
       mysql_db:
-        login_host: mysql3
+        login_host: 192.168.0.206,192.168.0.207
         login_user: root
         login_password: "root"
         login_port: 3306
