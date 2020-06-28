@@ -68,7 +68,7 @@
       loop: "{{packages}}"
     - name: fetch
       fetch:
-        dest: /tmp/
+        dest: /usr/local/mysqlfile/
         src: /tmp/mezz1.sql
 #    - name: dump a database
 #      mysql_db:
