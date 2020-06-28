@@ -3,6 +3,14 @@
   hosts: mysql3
   become: true
   tasks:
+    #解决 pip安装时报错
+    - name: weget pip
+      shell: "wget -P /usr/local/yum http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+    # 第一次执行时需要进行安装
+    #    - name: rpm pip install
+    #      shell: "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
+    - name: rpm pip
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh epel-release-6-8.noarch.rpm"
     - name: installed pip
       yum:
         name: python-pip
