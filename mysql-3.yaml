@@ -17,9 +17,10 @@
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz.sql
+        target: /tmp/mezz$(date +%Y-%m-%d).sql
         state: "dump"
     - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz$(date +%Y-%m-%d).sql
+        src: /tmp/mezz.sql
+
