@@ -12,8 +12,11 @@
 #      yum:
 #        name: "*"
 #        state: latest
-    - name: yum remove
-      shell: "yum remove epel-release"
+    - name: yum remove epel-release
+      yum:
+        name: epel-release
+        state: removed
+
     - name: yum -y install epel-release
       yum:
         name: epel-release;
