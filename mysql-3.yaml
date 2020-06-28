@@ -3,6 +3,13 @@
   hosts: mysql3
   become: true
   tasks:
+    - name: MySQL-python
+      #      yum:
+      #        name: MySQL-python
+      #      #        state: installed
+      #        state: installed
+      pip:
+        name: MySQL-python
     - name: dump a database
       mysql_db:
         login_host: 192.168.0.206
