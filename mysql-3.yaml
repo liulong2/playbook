@@ -25,6 +25,25 @@
         state: latest
     - name: update pip
       shell: "pip install --upgrade pip"
+
+
+    - name: weget
+      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+        #        state: installed
+        #        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+    - name: rpm
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
+
+    - name: Installed mysql-devel
+      yum:
+        name: mysql-devel
+        state: present
+
+    - name: gcc
+      yum:
+        name: gcc
+        state: installed
+  #      shell: "yum install gcc"
     - name: MySQL-python
       #      yum:
       #        name: MySQL-python
