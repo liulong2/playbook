@@ -69,7 +69,7 @@
     - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz11111.sql
+        src: /tmp/mezz.sql
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
