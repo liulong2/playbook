@@ -8,10 +8,10 @@
       shell: "yum clean all"
     - name: yum clean all
       shell: "rpm --rebuilddb"
-#    - name: upgrade all packages
-#      yum:
-#        name: "*"
-#        state: latest
+    - name: upgrade all packages
+      yum:
+        name: "*"
+        state: latest
     - name: yum remove epel-release
       yum:
         name: epel-release
