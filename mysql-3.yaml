@@ -2,6 +2,11 @@
 - name: mysql
   hosts: mysql3
   become: true
+  vars:
+    packages:
+      - 192.168.0.206
+      - 192.168.0.207
+
   tasks:
     #解决 pip安装时报错
 #    - name: yum clean all
@@ -53,27 +58,27 @@
 #        name: MySQL-python
     - name: dump a database
       mysql_db:
-        login_host: 192.168.0.206
+        login_host: {{packages}}
         login_user: root
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz$(date +%Y-%m-%d).sql
+        target: /tmp/mezz.sql
         state: "dump"
     - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz$(date "+%Y-%m-%d").sql
-    - name: dump a database
-      mysql_db:
-        login_host: 192.168.0.207
-        login_user: root
-        login_password: "root"
-        login_port: 3306
-        name: all
-        target: /tmp/mezz$(date +%Y-%m-%d).sql
-        state: "dump"
-    - name: fetch
-      fetch:
-        dest: /tmp/
-        src: /tmp/mezz$(date +%Y-%m-%d).sql
+        src: /tmp/mezz.sql
+#    - name: dump a database
+#      mysql_db:
+#        login_host: 192.168.0.207
+#        login_user: root
+#        login_password: "root"
+#        login_port: 3306
+#        name: all
+#        target: /tmp/mezz.sql
+#        state: "dump"
+#    - name: fetch
+#      fetch:
+#        dest: /tmp/
+#        src: /tmp/mezz.sql
