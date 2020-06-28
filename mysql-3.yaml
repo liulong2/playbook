@@ -4,18 +4,18 @@
   become: true
   tasks:
     #解决 pip安装时报错
-    - name: yum clean all
-      shell: "yum clean all"
-    - name: yum clean all
-      shell: "rpm --rebuilddb"
-#    - name: upgrade all packages
+#    - name: yum clean all
+#      shell: "yum clean all"
+#    - name: yum clean all
+#      shell: "rpm --rebuilddb"
+##    - name: upgrade all packages
+##      yum:
+##        name: "*"
+##        state: latest
+#    - name: yum remove epel-release
 #      yum:
-#        name: "*"
-#        state: latest
-    - name: yum remove epel-release
-      yum:
-        name: epel-release
-        state: removed
+#        name: epel-release
+#        state: removed
 
     - name: yum -y install epel-release
       shell: "yum -y install epel-release"
