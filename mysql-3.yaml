@@ -4,20 +4,27 @@
   become: true
   tasks:
     #解决 pip安装时报错
-    - name: weget pip
-      shell: "wget -P /usr/local/yum http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
-    # 第一次执行时需要进行安装
-    #    - name: rpm pip install
-    #      shell: "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
-    - name: rpm pip
-      shell: chdir=/usr/local/yum  executeble="rpm -ivh epel-release-6-8.noarch.rpm"
-    - name: update yum
+    - name: yum clean all
+      shell: "yum clean all"
+    - name: yum clean all
+      shell: "rpm --rebuilddb"
+    - name: yum update
+      shell: "yum update"
+    - name: yum remove
+      shell: "yum remove epel-release"
+    - name: yum -y install epel-release
       yum:
-        name: update
-    - name: update yum
-      shell: "yum -y install epel-release"
+        name: epel-release;
+        state: installed
+
+
 #    - name: update yum
-#      shell: "yum install -y python-pip"
+#      yum:
+#        name: update
+#    - name: yum
+#      shell: "yum -y install epel-release"
+##    - name: update yum
+##      shell: "yum install -y python-pip"
 
 #    #解决 pip安装时报错
 #    - name: rpm pip bug
