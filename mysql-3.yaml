@@ -1,7 +1,7 @@
 ---
 - name: mysql
   hosts: mysql3
-  sudo: true
+  become: sudo
   sudo_user: root
   vars:
     packages:
