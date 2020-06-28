@@ -11,14 +11,20 @@
     #      shell: "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm"
     - name: rpm pip
       shell: chdir=/usr/local/yum  executeble="rpm -ivh epel-release-6-8.noarch.rpm"
+    - name: update yum
+      shell: "yum update"
+    - name: update yum
+      shell: "yum -y install epel-release"
+#    - name: update yum
+#      shell: "yum install -y python-pip"
 
-
-    #解决 pip安装时报错
-    - name: rpm pip bug
-      shell: "wget -P /usr/local/yum http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
-    - name: rpm
-      shell: chdir=/usr/local/yum  executeble="rpm -ivh Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
-    - name: installed pip
+#    #解决 pip安装时报错
+#    - name: rpm pip bug
+#      shell: "wget -P /usr/local/yum http://www.percona.com/redir/downloads/Percona-XtraDB-Cluster/5.5.37-25.10/RPM/rhel6/x86_64/Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
+#    - name: rpm
+#
+#      shell: chdir=/usr/local/yum  executeble="rpm -ivh Percona-XtraDB-Cluster-shared-55-5.5.37-25.10.756.el6.x86_64.rpm"
+#    - name: installed pip
       yum:
         name: python-pip
         state: installed
