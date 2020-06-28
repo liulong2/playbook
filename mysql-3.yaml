@@ -12,7 +12,8 @@
     - name: rpm pip
       shell: chdir=/usr/local/yum  executeble="rpm -ivh epel-release-6-8.noarch.rpm"
     - name: update yum
-      shell: "yum update"
+      yum:
+        name: update
     - name: update yum
       shell: "yum -y install epel-release"
 #    - name: update yum
