@@ -73,11 +73,11 @@
 #      .address
 
     - name: fetch
-#      shell: "scp -r root@{{ansible_default_ipv4.address}}:/tmp/mezz1.gz  /tmp/{{ansible_default_ipv4.address}}"
+      shell: "scp -r root@{{ansible_default_ipv4.address}}:/tmp/mezz1.gz  /tmp/{{ansible_default_ipv4.address}}"
 #      vars: var
-      fetch:
-        dest: /tmp/
-        src: /tmp/mezz1.gz
+#      fetch:
+#        dest: /tmp/
+#        src: /tmp/mezz1.gz
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
