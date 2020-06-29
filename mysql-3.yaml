@@ -58,7 +58,7 @@
 
     - name: dump a database
       mysql_db:
-        login_host: "{{inventory_hostname}}"
+        login_host: "{{hostvars['mysql3']['ansible_default_ipv4']['address']}}"
         login_user: root
         login_password: "root"
         login_port: 3306
