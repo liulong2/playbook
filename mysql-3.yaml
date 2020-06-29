@@ -62,14 +62,13 @@
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz1.sql
+        target: /tmp/mezz1.gz
         state: "dump"
       loop: "{{packages}}"
+    - name: fetch
       fetch:
         dest: /tmp/
-        src: /tmp/mezz1.sql
-
-
+        src: /tmp/mezz1.gz
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
