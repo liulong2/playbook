@@ -75,7 +75,7 @@
 #    - name: fetch7
 #      command : "scp -r root@192.168.0.207:/tmp/mezz1.gz  /tmp/192.168.0.207/"
     - name: fetch6
-      command : "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/mezz206.sql"
+      command : "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/mezz206{{'ansible_date_time.date'}}.sql"
 #      vars: var
 #      fetch:
 #        dest: /tmp/
