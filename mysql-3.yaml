@@ -70,8 +70,8 @@
       debug: var=ansible_default_ipv4
 #      .address
 
-#    - name: fetch
-#      shell: "scp -r root@{{ansible_default_ipv4}}:/tmp/mezz1.gz  /tmp/{{ansible_default_ipv4}}"
+    - name: fetch
+      shell: "scp -r root@{{['ansible_default_ipv4']['address']}}:/tmp/mezz1.gz  /tmp/{{['ansible_default_ipv4']['address']}}"
 #      vars: var
 #      fetch:
 #        dest: /tmp/
