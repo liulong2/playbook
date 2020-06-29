@@ -65,13 +65,11 @@
         target: /tmp/mezz1.sql
         state: "dump"
       loop: "{{packages}}"
-    - name: fetch
       fetch:
         dest: /tmp/
         src: /tmp/mezz1.sql
-    - name: shell mv file
-      shell: "mv /tmp/{{item}}/mezz1.sql /tmp/{{item}}/mezz1$(date +%Y-%m-%d).sql"
-      loop: "{{packages}}"
+
+
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
