@@ -2,9 +2,9 @@
 - name: mysql
   hosts: mysql3
   vars:
-    packages:
-      - "192.168.0.206"
-      - "192.168.0.207"
+    packages: {{mysql3}}
+#      - "192.168.0.206"
+#      - "192.168.0.207"
 
   tasks:
     #解决 pip安装时报错
@@ -64,7 +64,7 @@
         name: all
         target: /tmp/mezz1.gz
         state: "dump"
-      loop: "{{hosts}}"
+      loop: "{{packages}}"
     - name: fetch
       - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
 #      fetch:
