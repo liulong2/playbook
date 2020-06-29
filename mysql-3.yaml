@@ -65,8 +65,8 @@
         target: /tmp/mezz1.gz
         state: "dump"
       loop: "{{packages}}"
-    - name: fetch
-      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
+#    - name: fetch
+#      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz1.gz
