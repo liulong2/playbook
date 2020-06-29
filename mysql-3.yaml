@@ -57,16 +57,16 @@
 #        name: MySQL-python
     - name: dump a database
       mysql_db:
-        login_host: "{{item}}"
+        login_host: "hostvars[inventory_hostname]['ansible_default_ipv4']['address']"
         login_user: root
         login_password: "root"
         login_port: 3306
         name: all
         target: /tmp/mezz1.gz
         state: "dump"
-      loop: "{{mysql3}}"
-    - name: fetch
-      - shell: "scp -r root@{{mysql3}}:/tmp/mezz1.gz  /tmp/{{packages}}"
+#      loop: "{{packages}}"
+#    - name: fetch
+#      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz1.gz
