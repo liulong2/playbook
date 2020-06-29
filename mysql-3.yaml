@@ -73,8 +73,9 @@
 #      .address
     - name: fetch6
       fetch:
-        dest: /tmp/
+        dest: /tmp/ss-{{ inventory_hostname }}.sql
         src: /tmp/mezz1.gz
+        flat: yes
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
