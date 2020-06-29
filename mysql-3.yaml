@@ -67,11 +67,12 @@
         state: "dump"
 #      loop: "{{packages}}"
     - name: ip
-      debug: var=ansible_default_ipv4.address
+      debug: var=ansible_default_ipv4
+#      .address
 
-    - name: fetch
-      shell: "scp -r root@{{var}}:/tmp/mezz1.gz  /tmp/{{var}}"
-      vars: var
+#    - name: fetch
+#      shell: "scp -r root@{{ansible_default_ipv4}}:/tmp/mezz1.gz  /tmp/{{ansible_default_ipv4}}"
+#      vars: var
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz1.gz
