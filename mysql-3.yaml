@@ -79,7 +79,7 @@
     - name: copy
       copy:
         src: /tmp/ss-{{ inventory_hostname }}.sql
-        dest: usr/
+        dest: /usr/
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
