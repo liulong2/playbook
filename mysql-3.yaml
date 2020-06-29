@@ -66,10 +66,9 @@
         state: "dump"
       loop: "{{packages}}"
     - name: fetch
-      shell: ansible all -m copy -a "src=/root/test.txt dest=/root force=yes backup=yes
-#      fetch:
-#        dest: /tmp/192.168.0.207/
-#        src: /tmp/mezz1.sql
+      fetch:
+        dest: /tmp/192.168.0.207/
+        src: /tmp/mezz1.sql
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
