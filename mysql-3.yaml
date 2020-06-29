@@ -65,25 +65,17 @@
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz1.sql
+        target: /tmp/mezz1.gz
         state: "dump"
 #      loop: "{{packages}}"
     - name: ip
       debug: var=ansible_default_ipv4
 #      .address
-    - name: fucking
-      find:
-        paths: /tmp/log/
-        patterns: "*.sql"
-        recurse: no
-      register: file_2_fetch
-
     - name: fetch6
       fetch:
         dest: /tmp/ss-{{ inventory_hostname }}.sql
-        src: "{{ item.path }}"
+        src: /tmp/mezz1.gz
         flat: yes
-      with_items: "{{ file_2_fetch.files }}"
 #    - name: copy
 #      copy:
 #        src: /tmp/ss-{{ inventory_hostname }}.sql
