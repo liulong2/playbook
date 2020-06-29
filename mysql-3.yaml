@@ -58,14 +58,14 @@
 
     - name: dump a database
       mysql_db:
-        login_host: "{{item}}"
+        login_host: "{{group_names}}"
         login_user: root
         login_password: "root"
         login_port: 3306
         name: all
         target: /tmp/mezz1.gz
         state: "dump"
-      loop: "{{packages}}"
+#      loop: "{{packages}}"
 #    - name: fetch
 #      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
 #      fetch:
