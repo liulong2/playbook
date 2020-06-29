@@ -66,9 +66,10 @@
         state: "dump"
       loop: "{{packages}}"
     - name: fetch
-      fetch:
-        dest: /tmp/
-        src: /tmp/mezz1.gz
+      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
+#      fetch:
+#        dest: /tmp/
+#        src: /tmp/mezz1.gz
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
