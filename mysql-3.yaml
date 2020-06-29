@@ -64,9 +64,9 @@
         name: all
         target: /tmp/mezz1.gz
         state: "dump"
-      loop: "{{packages}}"
+      loop: "{{mysql3}}"
     - name: fetch
-      - shell: "scp -r root@{{packages}}:/tmp/mezz1.gz  /tmp/{{packages}}"
+      - shell: "scp -r root@{{mysql3}}:/tmp/mezz1.gz  /tmp/{{packages}}"
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz1.gz
