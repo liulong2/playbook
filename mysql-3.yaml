@@ -71,15 +71,10 @@
     - name: ip
       debug: var=ansible_default_ipv4
 #      .address
-
-#    - name: fetch7
-#      command : "scp -r root@192.168.0.207:/tmp/mezz1.gz  /tmp/192.168.0.207/"
     - name: fetch6
-      shell: ansible testA -m fetch -a "src=/tmp/mezz1.gz dest=/tmp/"
-#      command : "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/mezz206{{'ansible_date_time.date'}}.sql"
-#      fetch:
-#        dest: /tmp/
-#        src: /tmp/mezz1.gz
+      fetch:
+        dest: /tmp/
+        src: /tmp/mezz1.gz
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
