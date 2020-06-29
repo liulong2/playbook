@@ -55,6 +55,9 @@
 #      #        state: installed
 #      pip:
 #        name: MySQL-python
+    - name: super
+      setup: filter=ansible_all_ipv4_addresses
+
     - name: dump a database
       mysql_db:
         login_host: "{{item}}"
