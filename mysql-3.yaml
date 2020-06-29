@@ -73,9 +73,9 @@
 #      .address
 
     - name: fetch7
-      shell: "scp -r root@192.168.0.207:/tmp/mezz1.gz  /tmp/192.168.0.207"
+      shell: "scp -r root@192.168.0.207:/tmp/mezz1.gz  /tmp/192.168.0.207/"
     - name: fetch6
-      shell: "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/192.168.0.206"
+      shell: "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/192.168.0.206/"
 #      vars: var
 #      fetch:
 #        dest: /tmp/
