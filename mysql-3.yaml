@@ -2,7 +2,7 @@
 - name: mysql
   hosts: mysql3
   vars:
-    packages: "{{mysql3}}"
+    packages:
       setup: filter=ansible_all_ipv4_addresses
 
   tasks:
