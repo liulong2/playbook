@@ -71,8 +71,8 @@
 #      .address
 
     - name: fetch
-      shell: "scp -r root@{{item}}:/tmp/mezz1.gz  /tmp/{{item}}"
-      loop: ansible_default_ipv4.address
+      shell: "scp -r root@{{ansible_default_ipv4.address}}:/tmp/mezz1.gz  /tmp/{{ansible_default_ipv4.address}}"
+#      vars: var
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz1.gz
