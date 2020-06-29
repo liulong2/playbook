@@ -75,11 +75,13 @@
 #    - name: fetch7
 #      command : "scp -r root@192.168.0.207:/tmp/mezz1.gz  /tmp/192.168.0.207/"
     - name: fetch6
-      command : "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/mezz206{{'ansible_date_time.date'}}.sql"
-#      vars: var
-#      fetch:
-#        dest: /tmp/
-#        src: /tmp/mezz1.gz
+#      command : "scp -r root@192.168.0.206:/tmp/mezz1.gz  /tmp/mezz206{{'ansible_date_time.date'}}.sql"
+      fetch:
+        dest: /tmp/
+        recurse: yes
+        state: touch
+        owner: root
+        src: /tmp/mezz1.gz
 #    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
