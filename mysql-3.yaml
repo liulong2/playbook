@@ -3,8 +3,7 @@
   hosts: mysql3
   vars:
     packages: "{{mysql3}}"
-#      - "192.168.0.206"
-#      - "192.168.0.207"
+      setup: filter=ansible_all_ipv4_addresses
 
   tasks:
     #解决 pip安装时报错
@@ -55,8 +54,7 @@
 #      #        state: installed
 #      pip:
 #        name: MySQL-python
-    - name: super
-      setup: filter=ansible_all_ipv4_addresses
+
 
     - name: dump a database
       mysql_db:
