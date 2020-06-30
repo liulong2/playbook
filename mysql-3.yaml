@@ -70,6 +70,8 @@
 #      loop: "{{packages}}"
     - name: ip
       debug: var=ansible_default_ipv4
+    - name: name
+      debug: var=ansible_hostname
 #      .address
     - name: fetch6
       fetch:
