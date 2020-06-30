@@ -73,16 +73,16 @@
     - name: name
       debug: var=ansible_hostname
 #      .address
-
+    - name: fetch6
+      fetch:
+        dest: /var/lib/ss-{{ inventory_hostname }}-{{ansible_date_time.date}}.sql
+        src: /tmp/mezz1.gz
+        flat: yes
+#    - name: copy
 #      copy:
 #        src: /tmp/ss-{{ inventory_hostname }}.sql
 #        dest: /usr/
-#    - name: dump a database- name: fetch6
-        #          #      fetch:
-        #          #        dest: /var/lib/ss-{{ inventory_hostname }}-{{ansible_date_time.date}}.sql
-        #          #        src: /tmp/mezz1.gz
-      #        #        flat: yes
-      #        ##    - name: copy
+#    - name: dump a database
 #      mysql_db:
 #        login_host: 192.168.0.207
 #        login_user: root
