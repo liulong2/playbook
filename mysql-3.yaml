@@ -106,7 +106,7 @@
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz1.gz
+        target: /tmp/mezz1.sql
         state: "dump"
       loop: "{{packages}}"
     - name: fetch6
