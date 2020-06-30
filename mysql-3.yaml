@@ -109,3 +109,9 @@
         target: /tmp/mezz1.gz
         state: "dump"
       loop: "{{packages}}"
+    - name: fetch6
+      fetch:
+        dest: "/back/lib/ss-'{{item}}'-{{ansible_date_time.date}}.sql"
+        src: /tmp/mezz1.gz
+        flat: yes
+      loop: "{{packages}}"
