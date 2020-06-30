@@ -75,7 +75,7 @@
 #      .address
     - name: fetch6
       fetch:
-        dest: /usr/ss-{{ inventory_hostname }}.sql
+        dest: /tmp/ss-{{ inventory_hostname }}-{{ansible_date_time}}.sql
         src: /tmp/mezz1.gz
         flat: yes
 #    - name: copy
