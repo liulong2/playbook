@@ -3,6 +3,7 @@
   hosts: mysql3
   become: true
   become_user: root
+  vars:
 
   tasks:
     #解决 pip安装时报错
@@ -107,4 +108,4 @@
         name: all
         target: /tmp/mezz1.gz
         state: "dump"
-        loop: "{{packages}}"
+      loop: "{{packages}}"
