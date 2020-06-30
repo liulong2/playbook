@@ -101,9 +101,9 @@
   tasks:
     - name: mysql
       mysql_db:
-        login_host: "{{item}}"
-        login_user: root
-        login_password: "root"
+        login_host: "{{item.name}}"
+        login_user: "{{item.username}}"
+        login_password: "{{item.password}}"
         login_port: 3306
         name: all
         target: /tmp/mezz1.sql
@@ -111,7 +111,7 @@
       loop: "{{packages}}"
     - name: fetch6
       fetch:
-        dest: "/back/lib/ss-'{{item}}'-{{ansible_date_time.date}}.sql"
+        dest: "/back/lib/ss-{{item.name}}-{{ansible_date_time.date}}.sql"
         src: /tmp/mezz1.gz
         flat: yes
       loop: "{{packages}}"
