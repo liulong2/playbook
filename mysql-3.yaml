@@ -3,9 +3,6 @@
   hosts: mysql3
   become: true
   become_user: root
-  vars:
-    packages:
-      setup: filter=ansible_all_ipv4_addresses
 
   tasks:
     #解决 pip安装时报错
@@ -95,3 +92,19 @@
 #      fetch:
 #        dest: /tmp/
 #        src: /tmp/mezz.sql
+- name: mysql
+  hosts: mysql4
+  become: true
+  become_user: root
+
+  tasks:
+    - name: mysql
+      mysql_db:
+        login_host: "{{item}}"
+        login_user: root
+        login_password: "root"
+        login_port: 3306
+        name: all
+        target: /tmp/mezz1.gz
+        state: "dump"
+        loop: "{{packages}}"
