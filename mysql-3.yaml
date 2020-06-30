@@ -73,7 +73,7 @@
 #      .address
     - name: fetch6
       fetch:
-        dest: /tmp/ss-{{ inventory_hostname }}.sql
+        dest: /usr/ss-{{ inventory_hostname }}.sql
         src: /tmp/mezz1.gz
         flat: yes
 #    - name: copy
