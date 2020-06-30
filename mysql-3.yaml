@@ -1,8 +1,8 @@
 ---
 - name: mysql
   hosts: mysql3
-  become: true
-  become_user: root
+#  become: true
+#  become_user: root
   vars:
     packages:
       setup: filter=ansible_all_ipv4_addresses
