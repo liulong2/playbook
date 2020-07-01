@@ -99,9 +99,9 @@
   become_user: root
   vars:
   tasks:
-    - name: loop
-      debug: var = "{{item.ip}}"
-      loop: "{{packages}}"
+#    - name: loop
+#      debug: var = "{{item.ip}}"
+#      loop: "{{packages}}"
     - name: mysql
       mysql_db:
         login_host: "{{item.ip}}"
