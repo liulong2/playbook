@@ -3,8 +3,15 @@
   become: true
   become_user: root
   tasks:
-    - name: copy test
-      copy:
-        src: "/var/lib/awx/projects/*zyz"
-        dest: "/usr/local/service-center/docker/zyz222"
+#    - name: copy test
+#      copy:
+#        src: "/var/lib/awx/projects/*zyz"
+#        dest: "/usr/local/service-center/docker/zyz222"
+    - name: git test
+      git:
+        repo: http://192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+        dest: /usr/local/peoject/zyz/
+        version: master
+        force: yes
+        key_file: ZNBP2ymAfnDRSzqu3dyi
 
