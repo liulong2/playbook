@@ -1,0 +1,11 @@
+- name: mysql
+  hosts: filepath
+  become: true
+  become_user: root
+  tasks:
+    - name: file
+      file:
+        path: "/usr/local/service-center/docker/"
+        state: "/{{path}}"
+        mode: 777
+        recurse: yes
