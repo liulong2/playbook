@@ -111,11 +111,11 @@
         name: all
         target: /tmp/mezz1.sql
         state: "dump"
-      when: "{{item.ip}}" != ("192.168.0.166" or "47.104.94.50")
+      when: item.ip != ("192.168.0.166" or "47.104.94.50")
       loop: "{{packages}}"
     - name: shell mysqldump
       shell: mysqldump --column-statistics=0 -h 192.168.0.166 -u root -p --all-databases > db.sql
-      when: "{{item.ip}}" == ("192.168.0.166" or "47.104.94.50")
+      when: item.ip == ("192.168.0.166" or "47.104.94.50")
       loop: "{{packages}}"
     - name: fetch6
       fetch:
