@@ -111,6 +111,7 @@
         name: all
         target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
+        encoding: utf8
       loop: "{{packages}}"
       ignore_errors: true
     - name: shell mysqldump
