@@ -5,4 +5,4 @@
 
   tasks:
     - name: shell remove 7day file
-      shell: * 5 * * * find /tmp/* -name "mysql-*" -ctime +7 -exec rm -rf {} \;
+      shell: * 5 * * * find /tmp/lib/* -name "mysql-*" -ctime +7 -exec rm -rf {} \;
