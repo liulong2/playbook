@@ -1,0 +1,8 @@
+- name: mysql
+  hosts: removeBackUp
+  become: true
+  become_user: root
+
+  tasks:
+    - name: shell remove 7day file
+      shell: * 5 * * * find /tmp/* -name "mysql-*" -ctime +7 -exec rm -rf {} \;
