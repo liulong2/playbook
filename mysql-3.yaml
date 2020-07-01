@@ -101,7 +101,9 @@
   tasks:
     - name: loop
       debug: var = "{{item}}"
-      loop: "{{packages}}"
+      loop:
+        - "{{packages.normalmysql}}"
+        - "{{packages.errormysql}}"
     - name: mysql
       mysql_db:
         login_host: "{{item.ip}}"
