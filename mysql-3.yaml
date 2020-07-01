@@ -121,12 +121,19 @@
     - name: shell mysqldump
       shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
-    - name: fetch6
+    - name: fetch mysql_db
       fetch:
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop:
         - "{{packages,errormysql}}"
-#        - "{{errormysql}}"
+    - name: fetch mysqldump
+        fetch:
+          dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+          src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+          flat: yes
+        loop:
+          - "{{errormysql}}"
+
 
