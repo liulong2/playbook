@@ -100,11 +100,11 @@
   vars:
   tasks:
     - name: loop
-      debug: var = "{{item.name}}"
+      debug: var = "{{item.ip}}"
       loop: "{{packages}}"
     - name: mysql
       mysql_db:
-        login_host: "{{item.name}}"
+        login_host: "{{item.ip}}"
         login_user: "{{item.username}}"
         login_password: "{{item.password}}"
         login_port: 3306
