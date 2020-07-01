@@ -99,35 +99,35 @@
   become_user: root
   vars:
   tasks:
-    - name: loop
-      debug: var = "{{packages}}"
-      loop:
-        - "{{packages}}"
-        - "{{errormysql}}"
+#    - name: loop
+#      debug: var = "{{item[0]}}" + "{{item[1]}}"
+#      loop:
+#        - "{{packages}}"
+#        - "{{errormysql}}"
     - name: mysql
-      block:
-        - mysql_db:
-            login_host: "{{item[0].key}}"
-            login_user: "{{item[0].username}}"
-            login_password: "{{item[0].password}}"
-            login_port: 3306
-            name: all
-            target: "/tmp/mysql-{{item[0].key}}-{{ansible_date_time.date}}.sql"
-            state: "dump"
-            encoding: utf8
-          when: item[0].key != 192.168.0.166 or item[0].key = 47.104.94.50
-          loop:
-            - "{{packages}}"
-            - "{{errormysql}}"
+      mysql_db:
+        login_host: "{{item.ip}}"
+        login_user: "{{item.username}}"
+        login_password: "{{item.password}}"
+        login_port: 3306
+        name: all
+        target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        state: "dump"
+        encoding: utf8
+      when: item.ip != {{errormysql}}.ip
+      loop: "{{packages}}"
+      ignore_errors: true
     #执行报错数据库备份
-      rescue:
-        - shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
-          loop: "{{errormysql}}"
+    - name: shell mysqldump
+      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      loop: "{{errormysql}}"
       ignore_errors: true
     - name: fetch6
       fetch:
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
-      loop: "{{packages}}"
+      loop:
+        - "{{packages}}"
+        - "{{errormysql}}"
 
