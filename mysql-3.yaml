@@ -112,13 +112,13 @@
         target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
         encoding: utf8
-      when: item != "errormysql"
+      when: item.ip != {{errormysql}}.ip
       loop: "{{packages}}"
       ignore_errors: true
     #执行报错数据库备份
     - name: shell mysqldump
       shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
-      loop: "{{packages.errormysql}}"
+      loop: "{{errormysql}}"
       ignore_errors: true
     - name: fetch6
       fetch:
