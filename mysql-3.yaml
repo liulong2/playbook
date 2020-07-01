@@ -105,29 +105,29 @@
         - "{{packages}}"
         - "{{errormysql}}"
     - name: mysql
-      mysql_db:
-        login_host: "{{item[0].key}}"
-        login_user: "{{item[0].username}}"
-        login_password: "{{item[0].password}}"
-        login_port: 3306
-        name: all
-        target: "/tmp/mysql-{{item[0].key}}-{{ansible_date_time.date}}.sql"
-        state: "dump"
-        encoding: utf8
-      when: item[0].key != item[1].ip or item[1] is none
-      loop:
-        - "{{packages}}"
-        - "{{errormysql}}"
-      ignore_errors: true
+      block:
+        mysql_db:
+          login_host: "{{item[0].key}}"
+          login_user: "{{item[0].username}}"
+          login_password: "{{item[0].password}}"
+          login_port: 3306
+          name: all
+          target: "/tmp/mysql-{{item[0].key}}-{{ansible_date_time.date}}.sql"
+          state: "dump"
+          encoding: utf8
+        when: item[0].key != 192.168.0.166 or item[0].key = 47.104.94.50
+        loop:
+          - "{{packages}}"
+          - "{{errormysql}}"
     #执行报错数据库备份
-#    - name: shell mysqldump
-#      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
-#      loop: "{{errormysql}}"
-#      ignore_errors: true
-#    - name: fetch6
-#      fetch:
-#        dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
-#        src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
-#        flat: yes
-#      loop: "{{packages}}"
+      rescue:
+        shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+        loop: "{{errormysql}}"
+      ignore_errors: true
+    - name: fetch6
+      fetch:
+        dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        flat: yes
+      loop: "{{packages}}"
 
