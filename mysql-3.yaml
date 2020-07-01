@@ -114,7 +114,7 @@
         target: "/tmp/mysql-{{item[0].ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
         encoding: utf8
-      when: item[0].ip != item[1].ip
+      when: item[0].ip != item[1].ip or item[1] is none
       loop:
         - "{{packages}}"
         - "{{errormysql}}"
