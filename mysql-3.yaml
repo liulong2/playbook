@@ -66,11 +66,11 @@
         target: /tmp/mezz1.gz
         state: "dump"
 #      loop: "{{packages}}"
-    - name: ip
-      debug: var=ansible_default_ipv4
-    - name: name
-      debug: var=ansible_hostname
-#      .address
+#    - name: ip
+#      debug: var=ansible_default_ipv4
+#    - name: name
+#      debug: var=ansible_hostname
+##      .address
     - name: fetch6
       fetch:
         dest: /back/lib/ss-{{ inventory_hostname }}-{{ansible_date_time.date}}.sql
@@ -100,7 +100,7 @@
   vars:
   tasks:
     - name: loop
-      debug: var = "{{item[0]}}" + "{{item[1]}}"
+      debug: var = "{{item[1]}}"
       loop:
         - "{{packages}}"
         - "{{errormysql}}"
