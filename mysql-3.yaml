@@ -106,12 +106,12 @@
         - "{{errormysql}}"
     - name: mysql
       mysql_db:
-        login_host: "{{item.ip}}"
-        login_user: "{{item.username}}"
-        login_password: "{{item.password}}"
+        login_host: "{{item[0].ip}}"
+        login_user: "{{item[0].username}}"
+        login_password: "{{item[0].password}}"
         login_port: 3306
         name: all
-        target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        target: "/tmp/mysql-{{item[0].ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
         encoding: utf8
       when: item[0].ip != item[1].ip
