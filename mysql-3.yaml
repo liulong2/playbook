@@ -109,18 +109,18 @@
         login_password: "{{item.password}}"
         login_port: 3306
         name: all
-        target: /tmp/mezz1.sql
+        target: "/tmp/{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
-      when: item.ip != "192.168.0.166" or item.ip != "47.104.94.50"
       loop: "{{packages}}"
+      ignore_errors: true
     - name: shell mysqldump
-      shell: mysqldump --column-statistics=0 -h 192.168.0.166 -u root -p --all-databases > db.sql
-      when: item.ip == "192.168.0.166" or item.ip == "47.104.94.50"
-      loop: "{{packages}}"
+      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases > '/tmp/{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      loop: "{{errormysql}}"
+      ignore_errors: true
     - name: fetch6
       fetch:
-        dest: "/back/lib/ss-{{item.ip}}-{{ansible_date_time.date}}.sql"
-        src: /tmp/mezz1.gz
+        dest: "/back/lib/{{item.ip}}-{{ansible_date_time.date}}.sql"
+        src: "/tmp/{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{packages}}"
 
