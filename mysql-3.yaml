@@ -114,8 +114,10 @@
         target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
         encoding: utf8
-      when: item.ip != {{errormysql}}.ip
-      loop: "{{packages}}"
+      when: item[0].ip != item[1].ip
+      loop:
+        - "{{packages}}"
+        - "{{errormysql}}"
       ignore_errors: true
     #执行报错数据库备份
     - name: shell mysqldump
