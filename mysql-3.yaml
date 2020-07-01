@@ -127,6 +127,6 @@
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop:
-        - "{{packages}}"
+        - "{{packages,errormysql}}"
 #        - "{{errormysql}}"
 
