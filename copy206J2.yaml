@@ -5,13 +5,17 @@
   tasks:
     - name: file
       file:
-        path: "/usr/local/service-center/docker/'{{path}}'"
+        path: "/usr/local/service-center/docker/{{path}}"
+
         state: directory
         mode: 777
         recurse: yes
-    - name:
-      template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/'{{path}}" backup=yes
+    - name: template
+      template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{path}}/docker-compose.tmp"
+#      备份
+#      backup=yes
     - name: copy file
       copy:
-        src: /docker-compose/*.sh
-        dest: "/usr/local/service-center/docker/'{{path}}'"
+        src: "/dockersh/"
+        dest: "/usr/local/service-center/docker/{{path}}"
+        mode: +x
