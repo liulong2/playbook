@@ -110,7 +110,7 @@
         login_port: 3306
         name: all
         target: /tmp/mezz1.sql
-        state: "dump"
+        state: "dump --column-statistics=0"
       loop: "{{packages}}"
     - name: fetch6
       fetch:
@@ -118,3 +118,5 @@
         src: /tmp/mezz1.gz
         flat: yes
       loop: "{{packages}}"
+
+# mysqldump --column-statistics=0 -h 192.168.0.166 -u root -p --all-databases > db.sql
