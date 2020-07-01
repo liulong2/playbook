@@ -100,7 +100,7 @@
   vars:
   tasks:
     - name: loop
-      debug: var = "{{item}}"
+      debug: var = "{{item.name}}"
       loop: "{{packages}}"
     - name: mysql
       mysql_db:
