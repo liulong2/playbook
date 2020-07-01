@@ -127,7 +127,7 @@
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop:
-        - "{{packages,errormysql}}"
+        - "{{packages}}"
     - name: fetch mysqldump
         fetch:
           dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
