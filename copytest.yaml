@@ -9,11 +9,16 @@
 #        dest: "/usr/local/service-center/docker/zyz222"
     - name: git test
       git:
-        repo: git@192.168.0.168:lml/testsshkeyclone.git
-        dest: /usr/local/peoject/zyz/zyz
-        version: master
-        force: yes
-        accept_hostkey: yes
-        key_file: /root/.ssh/id_rsa
+        repo: 'http://192.168.0.168:8085/lml/testsshkeyclone.git'
+        dest: '/usr/local/peoject/zyz/zyz'
+        clone: yes
+        update: yes
+#      git:
+#        repo: git@192.168.0.168:lml/testsshkeyclone.git
+#        dest: /usr/local/peoject/zyz/zyz
+#        version: master
+#        force: yes
+#        accept_hostkey: yes
+#        key_file: /root/.ssh/id_rsa
 
 
