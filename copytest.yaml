@@ -1,5 +1,7 @@
 - name: mysql
   hosts: filepath
+  become: true
+  become_user: root
   tasks:
 #    - name: copy test
 #      copy:
