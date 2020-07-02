@@ -15,7 +15,6 @@
         dest: "/usr/local/peoject/"
         accept_hostkey: yes
         version: "V1.0"
-
         executable: /usr/bin/git
         force: yes
 
