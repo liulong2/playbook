@@ -14,7 +14,8 @@
         key_file: "~/.ssh/id_rsa"
         dest: "/usr/local/peoject/zyz"
         accept_hostkey: yes
-#        clone: no
+        ssh_opts: "-o StrictHostKeyChecking = no"
+        #        clone: no
 #        update: no
         version: "master"
         executable: /usr/bin/git
