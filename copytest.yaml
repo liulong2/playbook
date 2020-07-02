@@ -12,7 +12,7 @@
         accept_hostkey: yes
         executable: /usr/bin/
         repo: git@192.168.0.168:java/business/government/wc-xcb/zyzpt.git
-        dest: /usr/local/peoject/zyz/zyz
+        dest: /usr/local/peoject/
         version: master
         force: yes
         key_file: /root/.ssh/id_rsa
