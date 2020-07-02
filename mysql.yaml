@@ -1,0 +1,14 @@
+---
+- name: mysql
+  hosts: mysql3
+  become: true
+  vars:
+    packages:
+      - "192.168.0.206"
+      - "192.168.0.207"
+
+  tasks:
+    - name: fetch
+      fetch:
+        dest: /tmp/
+        src: /tmp/mezz1.sql
