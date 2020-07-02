@@ -14,7 +14,7 @@
         key_file: "/root/.ssh/id_rsa"
         dest: "/usr/local/peoject/zyz"
         accept_hostkey: yes
-        version: "V1.0"
+        version: "master"
         executable: /usr/bin/git
         force: yes
 
