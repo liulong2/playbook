@@ -13,5 +13,5 @@
         dest: /usr/local/peoject/zyz/
         version: master
         force: yes
-        key_file: ZNBP2ymAfnDRSzqu3dyi
+        key_file: /root/.ssh/
 
