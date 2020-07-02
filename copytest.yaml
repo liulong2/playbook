@@ -11,7 +11,7 @@
       git:
 #        remote: "zyz"
         repo: "git@192.168.0.168:lml/testsshkeyclone.git"
-#        key_file: "~/.ssh/id_rsa"
+        key_file: "~/.ssh/id_rsa"
         dest: "/usr/local/peoject/zyz"
         accept_hostkey: yes
         ssh_opts: "-o StrictHostKeyChecking = no"
@@ -19,7 +19,7 @@
 #        update: no
         version: "master"
         executable: /usr/bin/git
-#        force: yes
+        force: yes
 
 
 
