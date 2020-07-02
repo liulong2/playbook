@@ -13,6 +13,7 @@
         dest: /usr/local/peoject/zyz/zyz
         version: master
         force: yes
+        accept_hostkey: yes
         key_file: /root/.ssh/id_rsa
 
 
