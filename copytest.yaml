@@ -9,7 +9,7 @@
 #        dest: "/usr/local/service-center/docker/zyz222"
     - name: git test
       git:
-        repo: http://192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+        repo: git@192.168.0.168:java/business/government/wc-xcb/zyzpt.git
         dest: /usr/local/peoject/zyz/
         version: master
         force: yes
