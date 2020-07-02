@@ -13,8 +13,8 @@
         key_file: "/root/.ssh/id_rsa_git"
         dest: "/usr/local/peoject/"
         accept_hostkey: yes
-        version: "V1.0"
-#        remote: "master"
+        version: "master"
+        remote: "zyz"
         executable: /usr/bin/git
         force: yes
 
