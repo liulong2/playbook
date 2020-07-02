@@ -13,5 +13,5 @@
         dest: /usr/local/peoject/zyz/
         version: master
         force: yes
-        key_file: /root/.ssh/id_rsa
+        key_file: /root/.ssh/id_rsa.pub
 
