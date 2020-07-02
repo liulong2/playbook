@@ -11,7 +11,7 @@
       git:
         remote: "zyz"
         repo: "git@192.168.0.168:java/business/government/wc-xcb/zyzpt.git"
-        key_file: "/root/.ssh/"
+        key_file: "/root/.ssh/id_rsa"
         dest: "/usr/local/peoject/zyz"
         accept_hostkey: yes
         version: "V1.0"
