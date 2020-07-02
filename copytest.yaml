@@ -14,7 +14,7 @@
         dest: "/usr/local/peoject/"
         accept_hostkey: yes
         version: "master"
-        remote: "zyz"
+#        remote: "zyz"
         executable: /usr/bin/git
         force: yes
 
