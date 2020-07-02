@@ -13,7 +13,7 @@
         dest: /usr/local/peoject/zyz
         clone: yes
         update: yes
-#        accept_hostkey: yes
+        accept_hostkey: yes
 #        ssh_opts: -o StrictHostKeyChecking = no
         #        clone: no
 #        update: no
