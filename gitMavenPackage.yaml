@@ -69,7 +69,7 @@
 #      when为true或yes的时候才会执行上面的命令
       when: not reboot
     - name: shell rstart.sh
-      shell: sh /usr/local/service-center/docker/{{dockerfile}}/rstart.sh {{version}}
+      shell: "chdir=/usr/local/service-center/docker/{{dockerfile}} ./rstart.sh {{version}}"
       when: reboot
 
 
