@@ -1,0 +1,20 @@
+- name: mysql
+  hosts: filepath
+  become: true
+  become_user: root
+  tasks:
+    - name: remove
+      shell: "rm -r {{path}}"
+      ignore_errors: true
+    - name: git test
+      git:
+        repo: "http://{{ gitlabuser | urlencode }}:{{ gitlabpassword | urlencode }}@{{gitlabpackage}}"
+        dest: "{{clonepath}}"
+#        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+#    执行maven打包
+    - name: maven package
+      shell: "chdir={{clonepath}} mvn package"
+
+
+
+
