@@ -32,10 +32,10 @@
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
 #      置顶docker build
-#    - name: maven docker build
-#      shell: "chdir={{clonepath}} mvn docker:build"
-#    - name: maven push
-#      shell: "chdir={{clonepath}} mvn docker:push"
+    - name: maven docker build
+      shell: "chdir={{clonepath}} mvn docker:build"
+    - name: maven push
+      shell: "chdir={{clonepath}} mvn docker:push"
 
 
 
