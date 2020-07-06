@@ -63,10 +63,10 @@
         dest: "/usr/local/service-center/docker/{{dockerfile}}"
         mode: +x
     - name:  shell start.sh
-      shell: "chdir=/usr/local/service-center/docker/{{dockerfile}} ./start.sh {{version}}"
+      shell: "/usr/local/service-center/docker/{{dockerfile}}/start.sh {{version}}"
       when: {{reboot}} = no
     - name: shell rstart.sh
-      shell: "chdir=/usr/local/service-center/docker/{{dockerfile}} ./rstart.sh {{version}}"
+      shell: "/usr/local/service-center/docker/{{dockerfile}}/rstart.sh {{version}}"
       when: {{reboot}} = yes
 
 
