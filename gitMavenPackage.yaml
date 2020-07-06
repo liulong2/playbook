@@ -10,6 +10,8 @@
       git:
         repo: "http://{{ gitlabuser | urlencode }}:{{ gitlabpassword | urlencode }}@{{gitlabpackage}}"
         dest: "{{clonepath}}"
+        #放弃本地储存库的修改
+        force: yes
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
 #    删除src的test文件夹,会造成打包失败
     - name: remove package test path
