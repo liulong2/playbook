@@ -11,6 +11,10 @@
         repo: "http://{{ gitlabuser | urlencode }}:{{ gitlabpassword | urlencode }}@{{gitlabpackage}}"
         dest: "{{clonepath}}"
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+#    删除src的test文件夹,会造成打包失败
+    - name: remove package test path
+      shell: "rm -r {{clonepath}}/src/test"
+      ignore_errors: true
 #    执行maven打包
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
