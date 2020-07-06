@@ -65,12 +65,16 @@
         dest: "/usr/local/service-center/docker/{{dockerfile}}"
         mode: +x
     - name:  shell start.sh
-      shell: sh /usr/local/service-center/docker/{{dockerfile}}/start.sh
-#      {{version}}
+      shell:
+        chdir: /usr/local/service-center/docker/{{dockerfile}}
+        cmd: ./start.sh {{version}}
+      #      {{version}}
 #      when为true或yes的时候才会执行上面的命令
       when: not reboot
     - name: shell rstart.sh
-      shell: sh /usr/local/service-center/docker/{{dockerfile}}/rstart.sh
+      shell:
+        chdir: /usr/local/service-center/docker/{{dockerfile}}
+        cmd: ./rstart.sh {{version}}
 #      {{version}}
       when: reboot
 
