@@ -12,7 +12,7 @@
 #    - name: git test\
 #      shell: /usr/bin/git clone --origin origin git@192.168.0.168:lml/testsshkeyclone.git  /usr/local/peoject/zyz
 #      git: repo="git@192.168.0.168:java/business/government/wc-xcb/zyzpt.git" key_file=/root/.ssh/id_rsa_git dest=/usr/local/peoject/zyz clone=yes clone=yes update=yes version=master executable=/usr/bin/git force=yes
-#    - name: git test
+    - name: git test
 #      shell: "/usr/bin/git clone --origin origin git@github.com:liulong2/test.git  /usr/local/peoject/zyz"
 #      git: repo="git@github.com:liulong2/test.git" key_file=/root/.ssh/id_rsa_144 dest=/usr/local/peoject/zyz clone=yes clone=yes update=yes version=master executable=/usr/bin/git force=yes
       git:
