@@ -15,11 +15,11 @@
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
 #      在项目中创建docker文件夹
     - name: file docker
-        file:
-          path: "{{clonepath}}/docker"
-          state: directory
-          mode: 777
-          recurse: yes
+      file:
+        path: "{{clonepath}}/docker"
+        state: directory
+        mode: 777
+        recurse: yes
 #    将Dockerfile.j2模板传送到西相应的文件
     - name: template Dockerfile.j2
       template: src="/dockersh/docker/Dockerfile.j2" dest="{{clonepath}}/docker/Dockerfile"
@@ -32,9 +32,9 @@
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
 #      在指定位置创建目录
-    - name: file /usr/local/service-center/docker/{{path}}
+    - name: file /usr/local/service-center/docker/{{projectName}}
       file:
-        path: "/usr/local/service-center/docker/{{path}}"
+        path: "/usr/local/service-center/docker/{{projectName}}"
         state: directory
         mode: 777
         recurse: yes
@@ -47,7 +47,7 @@
     - name: copy file
       copy:
         src: "/dockersh/"
-        dest: "/usr/local/service-center/docker/{{path}}"
+        dest: "/usr/local/service-center/docker/{{projectName}}"
         mode: +x
 
 
