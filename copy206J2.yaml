@@ -6,14 +6,15 @@
     - name: file
       file:
         path: "/usr/local/service-center/docker/{{path}}"
-
         state: directory
         mode: 777
         recurse: yes
+#
     - name: template
       template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{path}}/docker-compose.tmp"
 #      备份
 #      backup=yes
+#    .sh文件传送到远程服务器
     - name: copy file
       copy:
         src: "/dockersh/"

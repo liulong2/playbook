@@ -13,6 +13,17 @@
         #放弃本地储存库的修改
         force: yes
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+#      在项目中创建docker文件夹
+    - name: file docker
+        file:
+          path: "{{clonepath}}/docker"
+          state: directory
+          mode: 777
+          recurse: yes
+#    将Dockerfile.j2模板传送到西相应的文件
+    - name: template Dockerfile.j2
+      template: src="/dockersh/docker/Dockerfile.j2" dest="{{clonepath}}/docker/Dockerfile"
+
 #    删除src的test文件夹,会造成打包失败
     - name: remove package test path
       shell: "rm -r {{clonepath}}/src/test"
@@ -20,6 +31,24 @@
 #    执行maven打包
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
+#      在指定位置创建目录
+    - name: file /usr/local/service-center/docker/{{path}}
+      file:
+        path: "/usr/local/service-center/docker/{{path}}"
+        state: directory
+        mode: 777
+        recurse: yes
+        #将docker-compose.tmp复制到相应路径
+    - name: template docker-compose.tmp.j2
+      template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{path}}/docker-compose.tmp"
+    #      备份
+    #      backup=yes
+    #    .sh文件传送到远程服务器
+    - name: copy file
+      copy:
+        src: "/dockersh/"
+        dest: "/usr/local/service-center/docker/{{path}}"
+        mode: +x
 
 
 
