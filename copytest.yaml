@@ -16,7 +16,8 @@
 #      shell: "/usr/bin/git clone --origin origin git@github.com:liulong2/test.git  /usr/local/peoject/zyz"
 #      git: repo="git@github.com:liulong2/test.git" key_file=/root/.ssh/id_rsa_144 dest=/usr/local/peoject/zyz clone=yes clone=yes update=yes version=master executable=/usr/bin/git force=yes
       git:
-        repo: "https://{{ githubuser | urlencode }}:{{ githubpassword | urlencode }}@github.com/liulong2/xingyv.git"
+#        repo: "https://{{ githubuser | urlencode }}:{{ githubpassword | urlencode }}@github.com/liulong2/xingyv.git"
+        repo: "http://{{ githubuser | urlencode }}:{{ githubpassword | urlencode }}@192.168.0.168:8085/lml/testsshkeyclone.git"
 #        repo: "https://github.com/liulong2/xingyv.git"
         dest: /usr/local/peoject/lllzzz
 #        version: master
