@@ -15,11 +15,11 @@
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
 #      在项目中创建docker文件夹
     - name: file docker
-        file:
-          path: "{{clonepath}}/docker"
-          state: directory
-          mode: 777
-          recurse: yes
+      file:
+        path: "{{clonepath}}/docker"
+        state: directory
+        mode: 777
+        recurse: yes
 #    将Dockerfile.j2模板传送到西相应的文件
     - name: template Dockerfile.j2
       template: src="/dockersh/docker/Dockerfile.j2" dest="{{clonepath}}/docker/Dockerfile"
