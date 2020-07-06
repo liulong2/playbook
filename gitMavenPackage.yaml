@@ -40,7 +40,7 @@
         recurse: yes
         #将docker-compose.tmp复制到相应路径
     - name: template docker-compose.tmp.j2
-      template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{path}}/docker-compose.tmp"
+      template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{projectName}}/docker-compose.tmp"
     #      备份
     #      backup=yes
     #    .sh文件传送到远程服务器
