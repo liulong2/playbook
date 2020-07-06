@@ -64,10 +64,10 @@
         mode: +x
     - name:  shell start.sh
       shell: "/usr/local/service-center/docker/{{dockerfile}}/start.sh {{version}}"
-      when: {{reboot}} = no
+      when: reboot = no
     - name: shell rstart.sh
       shell: "/usr/local/service-center/docker/{{dockerfile}}/rstart.sh {{version}}"
-      when: {{reboot}} = yes
+      when: reboot = yes
 
 
 
