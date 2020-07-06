@@ -28,6 +28,8 @@
     - name: remove package test path
       shell: "rm -r {{clonepath}}/src/test"
       ignore_errors: true
+    - name: maven clean
+      shell: "chdir={{clonepath}} mvn clean"
 #    执行maven打包
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
