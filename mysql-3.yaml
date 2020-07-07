@@ -45,6 +45,11 @@
       yum:
         name: gcc
         state: installed
+#        安装python devel
+    - name: yum install python-devel
+      yum:
+        name: python-devel
+        state: installed
   #      安装MySQL-python
     - name: MySQL-python
       pip:
