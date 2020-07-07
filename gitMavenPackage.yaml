@@ -2,13 +2,16 @@
   hosts: gitmavenproject
   become: true
   become_user: root
+  vars:
+    gitlabuser: lml
+    gitlabpassword: lml123456
   tasks:
     - name: remove
       shell: "rm -r {{path}}"
       ignore_errors: true
     - name: git test
       git:
-        repo: "http:// lml: lml123456@{{gitlabpackage}}"
+        repo: "http://{{ gitlabuser | urlencode }}:{{ gitlabpassword | urlencode }}@{{gitlabpackage}}"
         dest: "{{clonepath}}"
         #放弃本地储存库的修改
         force: yes
