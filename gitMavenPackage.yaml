@@ -12,6 +12,7 @@
         dest: "{{clonepath}}"
         #放弃本地储存库的修改
         force: yes
+#        需要打包的分支
 #        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
 #      在项目中创建docker文件夹
     - name: file docker

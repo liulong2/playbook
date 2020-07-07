@@ -6,54 +6,44 @@
   vars:
 
   tasks:
-    #解决 pip安装时报错
-    - name: yum clean all
-      shell: "yum clean all"
-    - name: yum clean all
-      shell: "rpm --rebuilddb"
-#    - name: upgrade all packages
+#    #解决 pip安装时报错
+#    - name: yum clean all
+#      shell: "yum clean all"
+#    - name: yum clean all
+#      shell: "rpm --rebuilddb"
+#    - name: yum remove epel-release
 #      yum:
-#        name: "*"
+#        name: epel-release
+#        state: removed
+##    安装epel-release
+#    - name: yum -y install epel-release
+#      shell: "yum -y install epel-release"
+#    - name: installed pip
+#      yum:
+#        name: python-pip
 #        state: latest
-    - name: yum remove epel-release
-      yum:
-        name: epel-release
-        state: removed
-#暂时注释
-    - name: yum -y install epel-release
-      shell: "yum -y install epel-release"
-    - name: installed pip
-      yum:
-        name: python-pip
-        state: latest
-    - name: update pip
-      shell: "pip install --upgrade pip"
-
-
-    - name: weget
-      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
-        #        state: installed
-        #        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
-    - name: rpm
-      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
-
-    - name: Installed mysql-devel
-      yum:
-        name: mysql-devel
-        state: present
-
-    - name: gcc
-      yum:
-        name: gcc
-        state: installed
-  #      shell: "yum install gcc"
-    - name: MySQL-python
-      #      yum:
-      #        name: MySQL-python
-      #      #        state: installed
-      #        state: installed
-      pip:
-        name: MySQL-python
+#    - name: update pip
+#      shell: "pip install --upgrade pip"
+#
+#
+#    - name: weget
+#      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+#    - name: rpm
+#      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
+#
+#    - name: Installed mysql-devel
+#      yum:
+#        name: mysql-devel
+#        state: present
+#
+#    - name: gcc
+#      yum:
+#        name: gcc
+#        state: installed
+#  #      shell: "yum install gcc"
+#    - name: MySQL-python
+#      pip:
+#        name: MySQL-python
 
 
     - name: dump a database
@@ -65,12 +55,6 @@
         name: all
         target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
-#      loop: "{{packages}}"
-#    - name: ip
-#      debug: var=ansible_default_ipv4
-#    - name: name
-#      debug: var=ansible_hostname
-##      .address
     - name: fetch6
       fetch:
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
