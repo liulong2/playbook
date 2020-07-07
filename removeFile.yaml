@@ -2,7 +2,8 @@
   hosts: removeBackUp
   become: true
   become_user: root
-
   tasks:
     - name: shell remove 7day file
-      shell: * 5 * * * find /tmp/lib/* -name "mysql-*" -ctime +7 -exec rm -rf {} \;
+      shell:
+        chdir: /usr/local/sh/
+        cmd: ./remove7dayfile.sh

@@ -13,7 +13,11 @@
         #放弃本地储存库的修改
         force: yes
 #        需要打包的分支
-#        192.168.0.168:8085/java/business/government/wc-xcb/zyzpt.git
+        version: master
+#        下载项目依赖
+    - name: download pom
+      shell: "chdir={{clonepath}} mvn -y pom.xml"
+      when: downloadrely
 #      在项目中创建docker文件夹
     - name: file docker
       file:
@@ -29,14 +33,16 @@
     - name: remove package test path
       shell: "rm -r {{clonepath}}/src/test"
       ignore_errors: true
+#      删除之前的jar
     - name: maven clean
       shell: "chdir={{clonepath}} mvn clean"
 #    执行maven打包
     - name: maven package
       shell: "chdir={{clonepath}} mvn package"
-#      置顶docker build
+#      执行docker build
     - name: maven docker build
       shell: "chdir={{clonepath}} mvn docker:build"
+#      执行 docker push
     - name: maven push
       shell: "chdir={{clonepath}} mvn docker:push"
 
@@ -57,8 +63,7 @@
         #将docker-compose.tmp复制到相应路径
     - name: template docker-compose.tmp.j2
       template: src="/docker-compose/docker-compose.tmp.j2" dest="/usr/local/service-center/docker/{{projectName}}/docker-compose.tmp"
-    #      备份
-    #      backup=yes
+    #      backup=yes 可以在覆盖前进行备份文件
     #    .sh文件传送到远程服务器
     - name: copy file
       copy:
@@ -69,14 +74,12 @@
       shell:
         chdir: /usr/local/service-center/docker/{{dockerfile}}
         cmd: ./start.sh {{version}}
-      #      {{version}}
 #      when为true或yes的时候才会执行上面的命令
       when: not reboot
     - name: shell rstart.sh
       shell:
         chdir: /usr/local/service-center/docker/{{dockerfile}}
         cmd: ./rstart.sh {{version}}
-#      {{version}}
       when: reboot
 
 

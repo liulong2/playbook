@@ -73,28 +73,41 @@
 
 #   执行另一分组
 - name: mysql
+#  服务器所在组名
   hosts: mysql5
+#  是否权限升级
   become: true
+#  以什么用户执行命令
   become_user: root
   vars:
   tasks:
 #   备份数据库
     - name: mysql
       mysql_db:
+#        数据库地址
         login_host: "{{item.ip}}"
+#        数据库用户名
         login_user: "{{item.username}}"
+#        数据库密码
         login_password: "{{item.password}}"
+#        数据库端口号
         login_port: 3306
+#        需要备份的数据库名称，all表示全部
         name: all
+#        备份文件路径
         target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+#        执行数据库操作dump备份，present建立，absent删除
         state: "dump"
+#        编码
         encoding: utf8
-#      when: item.ip != {{errormysql}}.ip
+#      循环
       loop: "{{packages}}"
+#      是否报错后继续执行默认为false
       ignore_errors: true
     #执行报错数据库备份
     - name: shell mysqldump
       shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+#      结局高版本数据库备份低版本数据库发生的错误
 #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
       ignore_errors: true
