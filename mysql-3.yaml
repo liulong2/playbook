@@ -6,54 +6,54 @@
   vars:
 
   tasks:
-#    #解决 pip安装时报错
-#    - name: yum clean all
-#      shell: "yum clean all"
-#    - name: yum clean all
-#      shell: "rpm --rebuilddb"
-#    - name: yum remove epel-release
-#      yum:
-#        name: epel-release
-#        state: removed
-##    安装epel-release
-#    - name: yum -y install epel-release
-#      shell: "yum -y install epel-release"
-##      安装 pip
-#    - name: installed pip
-#      yum:
-#        name: python-pip
-#        state: latest
-##        更新pip
-#    - name: update pip
-#      shell: "pip install --upgrade pip"
-#    - name: yum wget
-#      yum:
-#        name: wget
-#        state: latest
-##      安装mysql57-community mysql-devel
-#    - name: rpm mysql57-community
-#      shell: chdir=/etc/yum.repos.d/  executeble="rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
-#
-##    安装mysql-devel
-#    - name: Installed mysql-devel
-#      yum:
-#        name: mysql-devel
-#        state: latest
-#
-##   安装gcc
-#    - name: gcc
-#      yum:
-#        name: gcc
-#        state: installed
-##        安装python devel
-#    - name: yum install python-devel
-#      yum:
-#        name: python-devel
-#        state: installed
-#  #      安装MySQL-python
-#    - name: MySQL-python
-#      pip:
-#        name: MySQL-python
+    #解决 pip安装时报错
+    - name: yum clean all
+      shell: "yum clean all"
+    - name: yum clean all
+      shell: "rpm --rebuilddb"
+    - name: yum remove epel-release
+      yum:
+        name: epel-release
+        state: removed
+#    安装epel-release
+    - name: yum -y install epel-release
+      shell: "yum -y install epel-release"
+#      安装 pip
+    - name: installed pip
+      yum:
+        name: python-pip
+        state: latest
+#        更新pip
+    - name: update pip
+      shell: "pip install --upgrade pip"
+    - name: yum wget
+      yum:
+        name: wget
+        state: latest
+#      安装mysql57-community mysql-devel
+    - name: rpm mysql57-community
+      shell: chdir=/etc/yum.repos.d/  executeble="rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+
+#    安装mysql-devel
+    - name: Installed mysql-devel
+      yum:
+        name: mysql-devel
+        state: latest
+
+#   安装gcc
+    - name: gcc
+      yum:
+        name: gcc
+        state: installed
+#        安装python devel
+    - name: yum install python-devel
+      yum:
+        name: python-devel
+        state: installed
+  #      安装MySQL-python
+    - name: MySQL-python
+      pip:
+        name: MySQL-python
 
 #   备份数据库
     - name: dump a database
@@ -94,7 +94,8 @@
       ignore_errors: true
     #执行报错数据库备份
     - name: shell mysqldump
-      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+#      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
       ignore_errors: true
 #      从远程服务器拷贝文件到Tower服务器上
