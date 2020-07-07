@@ -1,51 +1,56 @@
 ---
 - name: mysql
-  hosts: mysql3
+  hosts: mysql5
   become: true
   become_user: root
   vars:
 
   tasks:
-#    #解决 pip安装时报错
-#    - name: yum clean all
-#      shell: "yum clean all"
-#    - name: yum clean all
-#      shell: "rpm --rebuilddb"
-#    - name: yum remove epel-release
-#      yum:
-#        name: epel-release
-#        state: removed
-##    安装epel-release
-#    - name: yum -y install epel-release
-#      shell: "yum -y install epel-release"
-#    - name: installed pip
-#      yum:
-#        name: python-pip
-#        state: latest
-#    - name: update pip
-#      shell: "pip install --upgrade pip"
-#
-#
-#    - name: weget
-#      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
-#    - name: rpm
-#      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
-#
-#    - name: Installed mysql-devel
-#      yum:
-#        name: mysql-devel
-#        state: present
-#
-#    - name: gcc
-#      yum:
-#        name: gcc
-#        state: installed
-#  #      shell: "yum install gcc"
-#    - name: MySQL-python
-#      pip:
-#        name: MySQL-python
+    #解决 pip安装时报错
+    - name: yum clean all
+      shell: "yum clean all"
+    - name: yum clean all
+      shell: "rpm --rebuilddb"
+    - name: yum remove epel-release
+      yum:
+        name: epel-release
+        state: removed
+#    安装epel-release
+    - name: yum -y install epel-release
+      shell: "yum -y install epel-release"
+#      安装 pip
+    - name: installed pip
+      yum:
+        name: python-pip
+        state: latest
+#        更新pip
+    - name: update pip
+      shell: "pip install --upgrade pip"
 
+#     安装mysql57-community
+    - name: weget
+      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+#      安装mysql57-community
+    - name: rpm mysql57-community
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
 
+#    安装mysql-devel
+    - name: Installed mysql-devel
+      yum:
+        name: mysql-devel
+        state: present
+
+#   安装gcc
+    - name: gcc
+      yum:
+        name: gcc
+        state: installed
+  #      安装MySQL-python
+    - name: MySQL-python
+      pip:
+        name: MySQL-python
+
+#   备份数据库
     - name: dump a database
       mysql_db:
 #        login_host: "192.168.0.203"
@@ -60,17 +65,15 @@
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
+
+#   执行另一分组
 - name: mysql
-  hosts: mysql4
+  hosts: mysql5
   become: true
   become_user: root
   vars:
   tasks:
-#    - name: loop
-#      debug: var = "{{item[0]}}" + "{{item[1]}}"
-#      loop:
-#        - "{{packages}}"
-#        - "{{errormysql}}"
+#   备份数据库
     - name: mysql
       mysql_db:
         login_host: "{{item.ip}}"
@@ -89,12 +92,14 @@
       shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
       ignore_errors: true
+#      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysql_db
       fetch:
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{packages}}"
+#      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysqldump
       fetch:
         dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
