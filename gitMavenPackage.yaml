@@ -16,7 +16,7 @@
         version: master
 #        下载项目依赖
     - name: download pom
-      shell: "chdir={{clonepath}} mvn -y pom.xml"
+      shell: "chdir={{clonepath}} mvn -f pom.xml clean install"
       when: downloadrely
 #      在项目中创建docker文件夹
     - name: file docker
