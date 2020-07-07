@@ -8,7 +8,7 @@
       ignore_errors: true
     - name: git test
       git:
-        repo: "http://{{ lml | urlencode }}:{{ lml123456 | urlencode }}@{{gitlabpackage}}"
+        repo: "http:// lml | urlencode : lml123456 | urlencode @{{gitlabpackage}}"
         dest: "{{clonepath}}"
         #放弃本地储存库的修改
         force: yes
