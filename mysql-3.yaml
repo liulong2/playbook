@@ -86,7 +86,7 @@
         login_password: "{{item.password}}"
         login_port: 3306
         name: all
-        target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        target: "/tmp/mysql-{{ansible_default_ipv4}}-{{ansible_date_time.date}}.sql"
         state: "dump"
         encoding: utf8
 #      when: item.ip != {{errormysql}}.ip
