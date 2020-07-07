@@ -41,7 +41,7 @@
     - name: Installed mysql-devel
       yum:
         name: mysql-devel
-        state: present
+        state: latest
 
 #   安装gcc
     - name: gcc
