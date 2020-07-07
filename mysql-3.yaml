@@ -65,6 +65,8 @@
         name: all
         target: "/tmp/mysql-{{ansible_default_ipv4}}-{{ansible_date_time.date}}.sql"
         state: "dump"
+    - name:
+        debug: var = ansible_default_ipv4
     - name: fetch6
       fetch:
         dest: "/back/lib/mysql-{{ansible_default_ipv4}}-{{ansible_date_time.date}}.sql"
