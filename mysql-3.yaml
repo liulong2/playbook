@@ -7,63 +7,63 @@
 
   tasks:
     #解决 pip安装时报错
-#    - name: yum clean all
-#      shell: "yum clean all"
-#    - name: yum clean all
-#      shell: "rpm --rebuilddb"
-##    - name: upgrade all packages
-##      yum:
-##        name: "*"
-##        state: latest
-#    - name: yum remove epel-release
+    - name: yum clean all
+      shell: "yum clean all"
+    - name: yum clean all
+      shell: "rpm --rebuilddb"
+#    - name: upgrade all packages
 #      yum:
-#        name: epel-release
-#        state: removed
-#暂时注释
-#    - name: yum -y install epel-release
-#      shell: "yum -y install epel-release"
-#    - name: installed pip
-#      yum:
-#        name: python-pip
+#        name: "*"
 #        state: latest
-#    - name: update pip
-#      shell: "pip install --upgrade pip"
-#
-#
-#    - name: weget
-#      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
-#        #        state: installed
-#        #        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
-#    - name: rpm
-#      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
-#
-#    - name: Installed mysql-devel
-#      yum:
-#        name: mysql-devel
-#        state: present
-#
-#    - name: gcc
-#      yum:
-#        name: gcc
-#        state: installed
-#  #      shell: "yum install gcc"
-#    - name: MySQL-python
-#      #      yum:
-#      #        name: MySQL-python
-#      #      #        state: installed
-#      #        state: installed
-#      pip:
-#        name: MySQL-python
+    - name: yum remove epel-release
+      yum:
+        name: epel-release
+        state: removed
+#暂时注释
+    - name: yum -y install epel-release
+      shell: "yum -y install epel-release"
+    - name: installed pip
+      yum:
+        name: python-pip
+        state: latest
+    - name: update pip
+      shell: "pip install --upgrade pip"
+
+
+    - name: weget
+      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+        #        state: installed
+        #        shell: "wget: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+    - name: rpm
+      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
+
+    - name: Installed mysql-devel
+      yum:
+        name: mysql-devel
+        state: present
+
+    - name: gcc
+      yum:
+        name: gcc
+        state: installed
+  #      shell: "yum install gcc"
+    - name: MySQL-python
+      #      yum:
+      #        name: MySQL-python
+      #      #        state: installed
+      #        state: installed
+      pip:
+        name: MySQL-python
 
 
     - name: dump a database
       mysql_db:
-#        login_host: "{{hostvars['mysql3']['ansible_default_ipv4']['address']}}"
+#        login_host: "192.168.0.203"
         login_user: root
         login_password: "root"
         login_port: 3306
         name: all
-        target: /tmp/mezz1.gz
+        target: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         state: "dump"
 #      loop: "{{packages}}"
 #    - name: ip
@@ -73,26 +73,9 @@
 ##      .address
     - name: fetch6
       fetch:
-        dest: /back/lib/ss-{{ inventory_hostname }}-{{ansible_date_time.date}}.sql
-        src: /tmp/mezz1.gz
+        dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
-#    - name: copy
-#      copy:
-#        src: /tmp/ss-{{ inventory_hostname }}.sql
-#        dest: /usr/
-#    - name: dump a database
-#      mysql_db:
-#        login_host: 192.168.0.207
-#        login_user: root
-#        login_password: "root"
-#        login_port: 3306
-#        name: all
-#        target: /tmp/mezz.sql
-#        state: "dump"
-#    - name: fetch
-#      fetch:
-#        dest: /tmp/
-#        src: /tmp/mezz.sql
 - name: mysql
   hosts: mysql4
   become: true
