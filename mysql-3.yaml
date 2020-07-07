@@ -30,12 +30,9 @@
       yum:
         name: wget
         state: latest
-#     安装mysql57-community
-    - name: weget
-      shell: "wget -P /usr/local/yum http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
 #      安装mysql57-community
     - name: rpm mysql57-community
-      shell: chdir=/usr/local/yum  executeble="rpm -ivh mysql57-community-release-el7-10.noarch.rpm"
+      shell: chdir=/etc/yum.repos.d/  executeble="rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
 
 #    安装mysql-devel
     - name: Installed mysql-devel
