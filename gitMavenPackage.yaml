@@ -1,5 +1,5 @@
 - name: mysql
-  hosts: filepath
+  hosts: gitmavenproject
   become: true
   become_user: root
   tasks:
@@ -49,7 +49,8 @@
 
 
 - name: mysql
-  hosts: docker203
+  hosts: gitmavenproject
+# hosts: dockerrun
   become: true
   become_user: root
   tasks:
