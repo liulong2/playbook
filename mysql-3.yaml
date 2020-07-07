@@ -63,7 +63,7 @@
         login_password: "root"
         login_port: 3306
         name: all
-        target: "/tmp/mysql-{{ansible_default_ipv4}}-{{ansible_date_time.date}}.sql"
+        target: "/tmp/mysql-{{ansible_default_ipv4.address}}-{{ansible_date_time.date}}.sql"
         state: "dump"
     - name: fetch6
       fetch:
