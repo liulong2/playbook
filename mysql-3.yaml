@@ -30,7 +30,7 @@
       yum:
         name: wget
         state: latest
-#      安装mysql57-community
+#      安装mysql57-community mysql-devel
     - name: rpm mysql57-community
       shell: chdir=/etc/yum.repos.d/  executeble="rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
 
