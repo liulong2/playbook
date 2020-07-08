@@ -1,0 +1,72 @@
+---
+- name: mysql
+  hosts: mysqldump
+  become: true
+  become_user: root
+  vars:
+
+  tasks:
+    #解决 pip安装时报错
+    - name: yum clean all
+      shell: "yum clean all"
+    - name: yum clean all
+      shell: "rpm --rebuilddb"
+    - name: yum remove epel-release
+      yum:
+        name: epel-release
+        state: removed
+    #    安装epel-release
+    - name: yum -y install epel-release
+      shell: "yum -y install epel-release"
+    #      安装 pip
+    - name: installed pip
+      yum:
+        name: python-pip
+        state: latest
+    #        更新pip
+    - name: update pip
+      shell: "pip install --upgrade pip"
+    - name: yum wget
+      yum:
+        name: wget
+        state: latest
+    #      安装mysql57-community mysql-devel
+    - name: rpm mysql57-community
+      shell: chdir=/etc/yum.repos.d/  executeble="rpm -ivh http://repo.mysql.com/yum/mysql-5.7-community/el/7/x86_64/mysql57-community-release-el7-10.noarch.rpm"
+
+    #    安装mysql-devel
+    - name: Installed mysql-devel
+      yum:
+        name: mysql-devel
+        state: latest
+
+    #   安装gcc
+    - name: gcc
+      yum:
+        name: gcc
+        state: installed
+    #        安装python devel
+    - name: yum install python-devel
+      yum:
+        name: python-devel
+        state: installed
+    #      安装MySQL-python
+    - name: MySQL-python
+      pip:
+        name: MySQL-python
+
+#   备份数据库
+#    - name: dump a database
+#      mysql_db:
+##        login_host: "192.168.0.203"
+#        login_user: root
+#        login_password: "root"
+#        login_port: 3306
+#        name: all
+#        target: "/tmp/mysql-{{ansible_default_ipv4.address}}-{{ansible_date_time.date}}.sql"
+#        state: "dump"
+#    - name: fetch6
+#      fetch:
+#        dest: "/back/lib/mysql-{{ansible_default_ipv4.address}}-{{ansible_date_time.date}}.sql"
+#        src: "/tmp/mysql-{{ansible_default_ipv4.address}}-{{ansible_date_time.date}}.sql"
+#        flat: yes

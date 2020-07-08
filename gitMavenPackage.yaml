@@ -3,6 +3,7 @@
   become: true
   become_user: root
   vars:
+#    gitlab账号密码
     gitlabuser: lml
     gitlabpassword: lml123456
   tasks:
