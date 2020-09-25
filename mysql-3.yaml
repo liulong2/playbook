@@ -39,6 +39,8 @@
 #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
       ignore_errors: true
+    - name: docker mysqldump
+      shell: "docker exec -it a5ba019a9da7 mysqldump -u $username -p --all-databases > /var/lib/mysql/$backup_dir/database_name-.dump"
 #      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysql_db
       fetch:
