@@ -55,7 +55,7 @@
   vars:
   tasks:
     - name: docker mysqldump
-      shell: "docker exec -i a5ba019a9da7 mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      shell: "docker exec -i {{item.dockerid}} mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
       when: mysqldocker
 #      ignore_errors: true
@@ -70,7 +70,7 @@
 #部分报错服务器
 - name: dopckermysql
   #  服务器所在组名
-  hosts: mysqldumperror
+  hosts: mysqldocker
   #  是否权限升级
   become: true
   #  以什么用户执行命令
