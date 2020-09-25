@@ -33,16 +33,17 @@
 #        判断是否要执行
       when: "item.ip == ansible_default_ipv4.address"
 #      是否报错后继续执行默认为false
-#      ignore_errors: true
+      ignore_errors: true
 #      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysql_db
       fetch:
-        dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        dest: "/data/mysqldump/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{packages}}"
 #        判断是否要执行
       when: "item.ip == ansible_default_ipv4.address"
+      ignore_errors: true
 
 #在docker中的mysql备份
 - name: dopckermysql
@@ -60,14 +61,15 @@
       shell: "docker exec -i {{item.dockerid}} mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
       when: "item.ip == ansible_default_ipv4.address"
-#      ignore_errors: true
+      ignore_errors: true
     - name: fetch mysqldump
       fetch:
-        dest: "/back/lib/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
+        dest: "/data/mysqldump/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{dockermysql}}"
       when: "item.ip == ansible_default_ipv4.address"
+      ignore_errors: true
 
 #部分报错服务器
 - name: mysqlerr
@@ -91,7 +93,7 @@
     #      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysqldump
       fetch:
-        dest: "/back/lib/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        dest: "/data/mysqldump/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{errormysql}}"
