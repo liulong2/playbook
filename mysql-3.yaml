@@ -59,7 +59,7 @@
     - name: docker mysqldump
       shell: "docker exec -i {{item.dockerid}} mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
-      when: "dockermysql is defined and item.ip == ansible_default_ipv4.address"
+      when: "dockermysql is defined or item.ip == ansible_default_ipv4.address"
 #      ignore_errors: true
     - name: fetch mysqldump
       fetch:
