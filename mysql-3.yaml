@@ -30,7 +30,7 @@
         encoding: utf8
 #      循环
       loop: "{{packages}}"
-      when: packages != null
+      when: "packages != ''"
 #      是否报错后继续执行默认为false
       ignore_errors: true
 #      从远程服务器拷贝文件到Tower服务器上
