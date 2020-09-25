@@ -28,7 +28,7 @@
         state: "dump"
 #        编码
         encoding: utf8
-      when: mysqltype == "true"
+      when: mysqltype
 #      循环
       loop: "{{packages}}"
 
