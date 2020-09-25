@@ -54,6 +54,8 @@
   become_user: root
   vars:
   tasks:
+    - debug: var=ansible_all_ipv4_addresses
+    - debug: var=ansible_default_ipv4.address
     - name: docker mysqldump
       shell: "docker exec -i {{item.dockerid}} mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
