@@ -28,9 +28,10 @@
         state: "dump"
 #        编码
         encoding: utf8
+      when: mysqltype == true
 #      循环
       loop: "{{packages}}"
-      when: mysqltype == true
+
 #      是否报错后继续执行默认为false
       ignore_errors: true
 #      从远程服务器拷贝文件到Tower服务器上
