@@ -28,12 +28,12 @@
         state: "dump"
 #        编码
         encoding: utf8
-      when: mysqltype
 #      循环
       loop: "{{packages}}"
-
+#        判断是否要执行
+      when: mysqltype
 #      是否报错后继续执行默认为false
-      ignore_errors: true
+#      ignore_errors: true
 #      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysql_db
       fetch:
@@ -41,11 +41,13 @@
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{packages}}"
+#        判断是否要执行
+      when: mysqltype
 
 #在docker中的mysql备份
 - name: dopckermysql
   #  服务器所在组名
-  hosts: mysqldumpdocker
+  hosts: mysqldocker
   #  是否权限升级
   become: true
   #  以什么用户执行命令
@@ -55,13 +57,15 @@
     - name: docker mysqldump
       shell: "docker exec -i a5ba019a9da7 mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
-      ignore_errors: true
+      when: mysqldocker
+#      ignore_errors: true
     - name: fetch mysqldump
       fetch:
         dest: "/back/lib/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql"
         src: "/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{dockermysql}}"
+      when: mysqldocker
 
 #部分报错服务器
 - name: dopckermysql
@@ -79,6 +83,7 @@
       #      结局高版本数据库备份低版本数据库发生的错误
       #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
+      when: mysqldumperror
 #      忽略报错
 #      ignore_errors: true
     #      从远程服务器拷贝文件到Tower服务器上
@@ -88,3 +93,28 @@
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{errormysql}}"
+      when: mysqldumperror
+
+#部分报错服务器
+- name: dopckermysql
+  #  服务器所在组名
+  hosts: remvefile
+  #  是否权限升级
+  become: true
+  #  以什么用户执行命令
+  become_user: root
+  vars:
+  tasks:
+#    cp删除脚本到远程目录
+    - name: remve file
+      copy:
+        src: "/usr/local/ansible-shell/remove.sh"
+        dest: "/usr/local/ansible-shell/remove.sh"
+        force: yes
+        others:
+          mode: 644
+#          执行删除脚本
+    - name: shell remove file
+      shell:
+        chdir: /usr/local/ansible-shell/
+        cmd: ./remove.sh
