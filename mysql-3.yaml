@@ -70,9 +70,9 @@
       when: "item.ip == ansible_default_ipv4.address"
 
 #部分报错服务器
-- name: dopckermysql
+- name: mysqlerr
   #  服务器所在组名
-  hosts: mysqldocker
+  hosts: mysqldumperror
   #  是否权限升级
   become: true
   #  以什么用户执行命令
@@ -85,9 +85,9 @@
       #      结局高版本数据库备份低版本数据库发生的错误
       #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
-      when: "item.ip == ansible_default_ipv4.address"
+#      when: "item.ip == ansible_default_ipv4.address"
 #      忽略报错
-#      ignore_errors: true
+      ignore_errors: true
     #      从远程服务器拷贝文件到Tower服务器上
     - name: fetch mysqldump
       fetch:
@@ -95,10 +95,11 @@
         src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{errormysql}}"
-      when: "item.ip == ansible_default_ipv4.address"
+      ignore_errors: true
+#      when: "item.ip == ansible_default_ipv4.address"
 
-#部分报错服务器
-- name: dopckermysql
+#删除过期备份文件
+- name: mysqlfileremove
   #  服务器所在组名
   hosts: remvefile
   #  是否权限升级
