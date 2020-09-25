@@ -56,7 +56,7 @@
   tasks:
     - name: docker mysqldump
       shell: "docker exec -i {{item.dockerid}} mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{ansible_date_time.date}}.sql'"
-      when: dockermysql.ip =  ansible_default_ipv4.address
+      when: dockermysql.ip ==  ansible_default_ipv4.address
       loop: "{{dockermysql}}"
 #      ignore_errors: true
     - name: fetch mysqldump
