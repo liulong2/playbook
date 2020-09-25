@@ -30,6 +30,7 @@
         encoding: utf8
 #      循环
       when: packages != null
+      wantlist: True
       loop: "{{packages}}"
 #      是否报错后继续执行默认为false
       ignore_errors: true
