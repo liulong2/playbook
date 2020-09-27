@@ -58,14 +58,14 @@
     - debug: var=ansible_all_ipv4_addresses
     - debug: var=ansible_default_ipv4.address
     - name: docker mysqldump
-      shell: "docker exec -i {{item.dockerid}} mysqldump -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/tmp/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql'"
+      shell: "docker exec -i {{item.dockerid}} mysqldump -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/usr/local/ansible-shell/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
       when: "item.ip == ansible_default_ipv4.address"
       ignore_errors: true
     - name: fetch mysqldump
       fetch:
         dest: "/data/mysqldump/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
-        src: "/tmp/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
+        src: "/usr/local/ansible-shell/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{dockermysql}}"
       when: "item.ip == ansible_default_ipv4.address"
@@ -83,7 +83,7 @@
   tasks:
     #执行报错数据库备份
     - name: shell mysqldump
-      shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/usr/local/ansible-shell/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       #      结局高版本数据库备份低版本数据库发生的错误
       #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
@@ -94,7 +94,7 @@
     - name: fetch mysqldump
       fetch:
         dest: "/data/mysqldump/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
-        src: "/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
+        src: "/usr/local/ansible-shell/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql"
         flat: yes
       loop: "{{errormysql}}"
       ignore_errors: true
@@ -110,16 +110,21 @@
   become_user: root
   vars:
   tasks:
-#    cp删除脚本到远程目录
+    #    cp删除脚本到远程目录
     - name: remve file
       copy:
         src: "/usr/local/ansible-shell/remove.sh"
         dest: "/usr/local/ansible-shell/remove.sh"
         force: yes
-        others:
-          mode: 644
-#          执行删除脚本
-    - name: shell remove file
+        mode: 0777
+      ignore_errors: true
+    #        解决bug
+    - name: bug
       shell:
         chdir: /usr/local/ansible-shell/
-        cmd: ./remove.sh
+        cmd: sed -i "s/\r//" remove.sh
+      ignore_errors: true
+    #          执行删除脚本
+    - name: shell remove file
+      shell: sh /usr/local/ansible-shell/remove.sh
+      ignore_errors: true
