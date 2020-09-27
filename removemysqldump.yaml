@@ -15,6 +15,12 @@
         dest: "/usr/local/ansible-shell/remove.sh"
         force: yes
         mode: 0777
+#        解决bug
+    - name: bug
+      shell:
+        chdir: /usr/local/ansible-shell/
+        cmd: .sed -i "s/\r//" remove.sh
     #          执行删除脚本
     - name: shell remove file
       shell: sh /usr/local/ansible-shell/remove.sh
+#
