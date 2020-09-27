@@ -14,8 +14,7 @@
         src: "/usr/local/ansible-shell/remove.sh"
         dest: "/usr/local/ansible-shell/remove.sh"
         force: yes
-        others:
-          mode: 644
+        mode: 644
     #          执行删除脚本
     - name: shell remove file
       shell:
