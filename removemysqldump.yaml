@@ -20,3 +20,4 @@
       shell:
         chdir: /usr/local/ansible-shell/
         cmd: ./remove.sh
+        mode: 644
