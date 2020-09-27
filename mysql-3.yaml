@@ -83,9 +83,9 @@
   tasks:
     #执行报错数据库备份
     - name: shell mysqldump
-      shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/usr/local/ansible-shell/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+#      shell: "mysqldump -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/usr/local/ansible-shell/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       #      结局高版本数据库备份低版本数据库发生的错误
-      #      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/tmp/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
+      shell: "mysqldump --column-statistics=0 -h '{{item.ip}}' -u '{{item.username}}' -p'{{item.password}}' --all-databases --force> '/usr/local/ansible-shell/mysql-{{item.ip}}-{{ansible_date_time.date}}.sql'"
       loop: "{{errormysql}}"
 #      when: "item.ip == ansible_default_ipv4.address"
 #      忽略报错
