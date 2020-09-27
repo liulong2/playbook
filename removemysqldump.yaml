@@ -1,0 +1,23 @@
+#删除过期备份文件
+- name: mysqlfileremove
+  #  服务器所在组名
+  hosts: remvefile
+  #  是否权限升级
+  become: true
+  #  以什么用户执行命令
+  become_user: root
+  vars:
+  tasks:
+    #    cp删除脚本到远程目录
+    - name: remve file
+      copy:
+        src: "/usr/local/ansible-shell/remove.sh"
+        dest: "/usr/local/ansible-shell/remove.sh"
+        force: yes
+        others:
+          mode: 644
+    #          执行删除脚本
+    - name: shell remove file
+      shell:
+        chdir: /usr/local/ansible-shell/
+        cmd: ./remove.sh
