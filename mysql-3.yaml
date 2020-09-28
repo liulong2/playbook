@@ -55,8 +55,8 @@
   become_user: root
   vars:
   tasks:
-    - debug: var=ansible_all_ipv4_addresses
-    - debug: var=ansible_default_ipv4.address
+#    - debug: var=ansible_all_ipv4_addresses
+#    - debug: var=ansible_default_ipv4.address
     - name: docker mysqldump
       shell: "docker exec -i {{item.dockerid}} mysqldump -u '{{item.username}}' -p'{{item.password}}' --all-databases --force > '/usr/local/ansible-shell/mysql-docker-{{item.ip}}-{{item.dockerid}}-{{ansible_date_time.date}}.sql'"
       loop: "{{dockermysql}}"
@@ -127,4 +127,15 @@
     #          执行删除脚本
     - name: shell remove file
       shell: sh /usr/local/ansible-shell/remove.sh
+      ignore_errors: true
+    - name: shell ansible remove file
+      shell:
+        chdir: /data/mysqldump/
+        cmd: sed -i "s/\r//" remove.sh
+      when: "ansible_default_ipv4.address == 192.168.0.207"
+      ignore_errors: true
+    #          执行删除脚本
+    - name: shell ansible remove file
+      shell: sh /data/mysqldump/remove.sh
+      when: "ansible_default_ipv4.address == 192.168.0.207"
       ignore_errors: true
