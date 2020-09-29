@@ -132,10 +132,10 @@
       shell:
         chdir: /data/mysqldump/
         cmd: sed -i "s/\r//" remove.sh
-      when: "ansible_default_ipv4.address == 192.168.0.207"
+      when: "ansible_default_ipv4.address == removefile"
       ignore_errors: true
     #          执行删除脚本
     - name: shell ansible remove file
       shell: sh /data/mysqldump/remove.sh
-      when: "ansible_default_ipv4.address == 192.168.0.207"
+      when: "ansible_default_ipv4.address == removefile"
       ignore_errors: true
